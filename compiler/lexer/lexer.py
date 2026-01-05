@@ -290,6 +290,9 @@ class Lexer:
                     self.linenum += 1
                     self.column = 0
 
+                case '\r':
+                    pass
+                
                 case ' ':
                     pass
 

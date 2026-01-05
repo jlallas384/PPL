@@ -4,7 +4,7 @@ export const languageName = "unk";
 
 export const languageConf = {
 	comments: {
-		lineComment: '#'
+		lineComment: '//',
 	},
 	brackets: [
 		['{', '}'],
@@ -12,19 +12,17 @@ export const languageConf = {
 		['(', ')']
 	],
 	autoClosingPairs: [
-		{ open: '{', close: '}' },
 		{ open: '[', close: ']' },
+		{ open: '{', close: '}' },
 		{ open: '(', close: ')' },
-		{ open: '"', close: '"' },
-		{ open: "'", close: "'" }
+		{ open: '"', close: '"', notIn: ['string'] }
 	],
 	surroundingPairs: [
 		{ open: '{', close: '}' },
 		{ open: '[', close: ']' },
 		{ open: '(', close: ')' },
 		{ open: '"', close: '"' },
-		{ open: "'", close: "'" }
-	]
+	],
 };
 
 export const languageDef = {

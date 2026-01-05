@@ -1,0 +1,48 @@
+class BaseClass {
+    variable: string // public variable 
+    # privvariable: string // private , hashtag means private, encapsulation
+    fn PublicMethod(): int 
+    fn #PrivateMethod(): int
+    fn BaseClass(param1: int) // constructor
+}
+
+
+class DerivedClass : BaseClass { // inheritance
+    fn ! PublicMethod(): int       // suggestion, override; compile error if PublicMethod isn’t defined in any of its base class
+   {
+       print("hello from DerivedClass");
+       return 1;
+   }
+}
+
+class DerivedClass2 : BaseClass {
+    fn !PublicMethod(): int {
+        print("hello from DerivedClass2");
+        return 2;
+   }
+}
+
+fn createDerived(type: int): BaseClass {
+     if type == 0 {
+          return new DerivedClass();
+     } else {
+          return new DerivedClass2();
+     }
+}
+fn main(): int {
+    let x: BaseClass = new BaseClass(10); // explicitly typed with ‘BaseClass’
+    let y = new BaseClass(100); // let type inference do the work; y will be be typed with ‘BaseClass’
+
+    let res = y.PublicMethod();
+    y.PrivateMethod(); // compile error
+    y.privvariable = 20; // compile error
+
+
+    let type: int;
+    read(type);   // from user input
+    
+    let base = CreateDerived(type);
+    base.PublicMethod(); // polymorphism, output either DerivedClass or DerivedClass2 based from user input
+
+    // x and y will be garbage collected after this function returns. 
+}

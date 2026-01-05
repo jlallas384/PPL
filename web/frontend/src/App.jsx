@@ -16,17 +16,38 @@ function App() {
   }
 
   return (
-    <>
-      <Editor
-        height="90vh"
-        width="90vh"
-        value={code}
-        onChange={(value) => setCode(value ?? "")}
-        beforeMount={handleEditorWillMount}
-        language={languageName}
-        theme="vs-dark"
-      />
-    </>
+    <div className="container">
+      <div className="panel editor">
+        <div className="header">
+          <span>EDITOR</span>
+          <buttom className="run-btn">Run</buttom>
+        </div>
+        <div className="wrapper">
+          <Editor
+            height="100%"
+            width="100%"
+            value={code}
+            onChange={(value) => setCode(value ?? "")}
+            beforeMount={handleEditorWillMount}
+            language={languageName}
+            theme="vs-dark"
+          />
+        </div>
+      </div>
+
+      <div className="panel output">
+        <div className="header">
+          <span>OUTPUT</span>
+        </div>
+        <div className="wrapper">
+          <p>
+            asdfafasaaaaaaaaaaaaaaaaaaaaaaa1313123213aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadasdaaaaaaaaaaaaafsafs
+            fas asfdsa <br />
+            fasdf asdf asdf asf
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 

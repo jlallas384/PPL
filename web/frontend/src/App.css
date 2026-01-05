@@ -1,42 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  height: 100%;
+  width: 100%;
+  background: #1e1e1e;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 8px;
+  padding: 8px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.panel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 1rem;
+  letter-spacing: 0.08rem;
+  color: #9ca3af;
+  background: #2d2d2d;
+  border-bottom: 1px solid #3a3a3a;
+  border-radius: 10px;
 }
 
-.card {
-  padding: 2em;
+.wrapper {
+  height: 100%;
+  width: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+.editor {
+  flex: 1;
+  background: #272727ff;
+}
+
+.output {
+  flex: 1;
+  background: #272727ff;
+}
+
+.output .wrapper {
+  padding: 0 12px;
+}
+
+.output p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: white;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.run-btn {
+  margin-left: auto;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.run-btn:hover {
+  background: #1d4ed8;
+}
+
+.run-btn:active {
+  background: #1e40af;
 }

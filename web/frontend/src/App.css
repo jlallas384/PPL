@@ -118,3 +118,8 @@ body,
 .token-table td.value {
   color: #dde1e9ff;
 }
+
+.token-highlight {
+  background-color: #ffff0059;
+  border-radius: 3px;
+}

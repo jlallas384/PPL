@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 
 import Editor from "@monaco-editor/react";
 import { languageConf, languageDef, languageName } from "./langconfig";
+import { highlightToken, clearHighlight } from "./utils/highlight";
 
 function App() {
   const [code, setCode] = useState("// Type something here..");
   const [output, setOutput] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const editorRef = useRef(null);
+  const decorationsRef = useRef([]);
 
   function handleEditorWillMount(monaco) {
     monaco.languages.register({
@@ -15,6 +19,10 @@ function App() {
     });
     monaco.languages.setMonarchTokensProvider(languageName, languageDef);
     monaco.languages.setLanguageConfiguration(languageName, languageConf);
+  }
+
+  function handleEditorDidMount(editor) {
+    editorRef.current = editor;
   }
 
   async function run() {
@@ -54,6 +62,7 @@ function App() {
             value={code}
             onChange={(value) => setCode(value ?? "")}
             beforeMount={handleEditorWillMount}
+            onMount={handleEditorDidMount}
             language={languageName}
             theme="vs-dark"
           />
@@ -78,7 +87,16 @@ function App() {
                 </thead>
                 <tbody>
                   {output.map((token, index) => (
-                    <tr key={index}>
+                    <tr
+                      key={index}
+                      onMouseEnter={() =>
+                        highlightToken(editorRef.current, token, decorationsRef)
+                      }
+                      onMouseLeave={clearHighlight(
+                        editorRef.current,
+                        decorationsRef
+                      )}
+                    >
                       <td className="kind">{token.kind}</td>
                       <td className="value">{token.value}</td>
                     </tr>

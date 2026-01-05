@@ -291,10 +291,10 @@ class Lexer:
                     self.column = 0
 
                 case ' ':
-                    self.column += 1     
-
+                    pass
+                
                 case '\t':
-                    self.column += 1
+                    pass
 
                 case _:
                     return invalid(c)

@@ -160,7 +160,7 @@ class Lexer:
                     if self.try_eat('/'): # throw away comments
                         while not self.done() and self.peek() != '\n':
                             self.consume()
-
+                        continue
                     return make(TokenKind.OP_DIVIDE, '/')
 
                 case '%':
@@ -292,7 +292,7 @@ class Lexer:
 
                 case ' ':
                     pass
-                
+
                 case '\t':
                     pass
 

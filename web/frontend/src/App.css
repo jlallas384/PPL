@@ -55,15 +55,8 @@ body,
 }
 
 .output .wrapper {
-  padding: 0 12px;
-}
-
-.output p {
-  margin: 0;
-  font-size: 1.1rem;
-  color: white;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+  padding: 12px 12px;
+  overflow: auto;
 }
 
 .run-btn {
@@ -84,4 +77,44 @@ body,
 
 .run-btn:active {
   background: #1e40af;
+}
+
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.token-table thead {
+  position: sticky;
+  top: 0;
+  background: #2d2d2d;
+}
+
+.token-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  color: #8b8b8bff;
+  border-bottom: 1px solid gray;
+}
+
+.token-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #2c2c2cff;
+}
+
+.token-table tbody tr:hover {
+  background: #58585849;
+}
+
+.token-table td.kind {
+  font-weight: 500;
+  color: #57a3ffff;
+}
+
+.token-table td.value {
+  color: #dde1e9ff;
 }

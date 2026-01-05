@@ -1,9 +1,35 @@
 export const languageName = "unk";
 
 //https://github.com/microsoft/monaco-editor/blob/main/src/basic-languages/rust/rust.ts
+
+export const languageConf = {
+	comments: {
+		lineComment: '#'
+	},
+	brackets: [
+		['{', '}'],
+		['[', ']'],
+		['(', ')']
+	],
+	autoClosingPairs: [
+		{ open: '{', close: '}' },
+		{ open: '[', close: ']' },
+		{ open: '(', close: ')' },
+		{ open: '"', close: '"' },
+		{ open: "'", close: "'" }
+	],
+	surroundingPairs: [
+		{ open: '{', close: '}' },
+		{ open: '[', close: ']' },
+		{ open: '(', close: ')' },
+		{ open: '"', close: '"' },
+		{ open: "'", close: "'" }
+	]
+};
+
 export const languageDef = {
   defaultToken: "invalid",
-  keywords: ["if", "fn", "else", "class"],
+  keywords: ["if", "fn", "else", "class", "let", "continue", "return", "break", "while"],
 
   operators: [
     "!",

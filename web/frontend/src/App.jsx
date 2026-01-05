@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 import Editor from "@monaco-editor/react";
-import { languageDef, languageName } from "./langconfig";
+import { languageConf, languageDef, languageName } from "./langconfig";
 
 function App() {
   const [code, setCode] = useState("// test");
@@ -12,6 +12,7 @@ function App() {
       id: languageName,
     });
     monaco.languages.setMonarchTokensProvider(languageName, languageDef);
+    monaco.languages.setLanguageConfiguration(languageName, languageConf);
   }
 
   return (

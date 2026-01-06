@@ -27,8 +27,8 @@ export const languageConf = {
 
 export const languageDef = {
   defaultToken: "invalid",
-  keywords: ["if", "fn", "else", "class", "let", "continue", "return", "break", "while"],
-
+  keywords: ["if", "fn", "else", "class", "let", "continue", "return", "break", "while", "new"],
+  dts: ["bool", "float", "int", "string", "char"],
   operators: [
     "!",
     "!=",
@@ -91,6 +91,7 @@ export const languageDef = {
         {
           cases: {
             "@keywords": "keyword",
+            "@dts": "keyword",
             "@default": "identifier",
           },
         },

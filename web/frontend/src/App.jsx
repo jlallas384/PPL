@@ -28,7 +28,7 @@ function App() {
   async function run() {
     setLoading(true);
 
-    const res = await fetch("http://localhost:8000/run", {
+    const res = await fetch("/run", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,6 +65,9 @@ function App() {
             onMount={handleEditorDidMount}
             language={languageName}
             theme="vs-dark"
+            options={{
+              smoothScrolling: true,
+            }}
           />
         </div>
       </div>

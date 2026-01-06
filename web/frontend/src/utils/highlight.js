@@ -9,6 +9,10 @@ export function highlightToken(editor, token, decorationsRef) {
     endColumn
   );
 
+  editor.revealPositionNearTop({
+    column: startColumn,
+    lineNumber: token.line,
+  }, editor.Smooth);
   decorationsRef.current = editor.deltaDecorations(decorationsRef.current, [
     {
       range,

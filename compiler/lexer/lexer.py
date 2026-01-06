@@ -30,7 +30,8 @@ class TokenKind(Enum):
     KW_CONTINUE = auto()
     KW_TRUE = auto()
     KW_FALSE = auto()
-
+    KW_LET = auto()
+    
     OP_ANDAND = auto()
     OP_OROR = auto()
     OP_PLUS = auto()

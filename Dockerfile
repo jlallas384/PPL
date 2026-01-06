@@ -14,6 +14,7 @@ RUN pip install --no-cache-dir -r ./compiler/requirements.txt && pip install --n
 
 COPY nginx.conf .
 
-COPY --chmod=0755 start.sh .
+COPY start.sh .
+RUN chmod +x start.sh
 
 CMD ["./start.sh"]

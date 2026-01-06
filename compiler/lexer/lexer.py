@@ -132,9 +132,9 @@ class Lexer:
             c = self.consume()
 
             match c:
-                case _ if 'a' <= c <= 'z' or 'A' <= c <= 'Z':
+                case _ if 'a' <= c <= 'z' or 'A' <= c <= 'Z' or c == '_':
                     value = c
-                    while not self.done() and self.peek().isalnum():
+                    while not self.done() and (self.peek().isalnum() or self.peek() == '_'):
                         value += self.consume()
 
                     return make(keyword_or_identifier(value), value)

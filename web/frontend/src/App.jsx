@@ -6,7 +6,11 @@ import { languageConf, languageDef, languageName } from "./langconfig";
 import { highlightToken, clearHighlight } from "./utils/highlight";
 
 function App() {
-  const [code, setCode] = useState("// Type something here..");
+  const [code, setCode] = useState(`
+fn main(): int {
+    // Type something here...
+    print("Hello World!");
+}`);
   const [output, setOutput] = useState(null);
   const [loading, setLoading] = useState(false);
 

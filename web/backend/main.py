@@ -37,7 +37,8 @@ def run_code(req: RunRequest):
             "kind": tok.kind.name,
             "value": tok.value,
             "line": tok.linenum,
-            "column": tok.column
+            "column": tok.column,
+            "diagnostic": tok.diagnostic
         })
 
     return {"tokens": tokens}

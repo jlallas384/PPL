@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import "./App.css";
 
-import Editor from "@monaco-editor/react";
+import Editor, { useMonaco } from "@monaco-editor/react";
 import { languageConf, languageDef, languageName } from "./langconfig";
 import { highlightToken, clearHighlight } from "./utils/highlight";
+import { setErrorMarkers } from "./utils/markers";
 
 function App() {
   const [code, setCode] = useState(`
@@ -16,6 +17,7 @@ fn main(): int {
 
   const editorRef = useRef(null);
   const decorationsRef = useRef([]);
+  const monaco = useMonaco();
 
   function handleEditorWillMount(monaco) {
     monaco.languages.register({
@@ -46,6 +48,7 @@ fn main(): int {
 
     const { tokens } = data;
 
+    setErrorMarkers(editorRef.current, tokens, monaco);
     setOutput(tokens);
     setLoading(false);
   }

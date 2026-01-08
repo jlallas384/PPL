@@ -73,6 +73,7 @@ class Token:
     linenum: int
     column: int
     value: str = ""
+    diagnostic: str = ""
 
     def eof(self):
         return self.kind == TokenKind.EOF
@@ -84,7 +85,6 @@ keywords = {
 
 def keyword_or_identifier(s):
     return keywords.get(s, TokenKind.IDENTIFIER)
-
 
 class Lexer:
     def __init__(self, _input: str):
@@ -120,8 +120,8 @@ class Lexer:
         def make(kind, value=""):
             return Token(kind, linenum, column, value)
 
-        def invalid(value):
-            return Token(TokenKind.INVALID, linenum, column, value)
+        def invalid(value, diag):
+            return Token(TokenKind.INVALID, linenum, column, value, diag)
 
         return make, invalid
 
@@ -195,7 +195,7 @@ class Lexer:
                         if not self.done():
                             value += self.consume()
 
-                        return invalid(value)
+                        return invalid(value, 'Expected second \'&\' to form operator \'&&\'')
                     
                     return make(TokenKind.OP_ANDAND, '&&')
                 
@@ -205,7 +205,7 @@ class Lexer:
                         if not self.done():
                             value += self.consume()
 
-                        return invalid(value)
+                        return invalid(value, 'Expected second \'|\' to form operator \'||\'')
                     
                     return make(TokenKind.OP_ANDAND, '||')
                 
@@ -228,31 +228,34 @@ class Lexer:
                         if self.try_eat('\\'):  # skip escaped character
                             value += '\\'
                             if self.done() or self.peek() == '\n':
-                                return invalid(value)
+                                return invalid(value, 'Missing terminating character \'"\'')
                         value += self.consume()
                         continue
 
                     if not self.try_eat('\"'): #fail since it was not closed
-                        return invalid(value)
+                        return invalid(value, 'Missing terminating character \'"\'')
                     
                     value += '\"'
                     return make(TokenKind.STRING_CONSTANT, value)
                 
                 case '\'':
                     value = c
-                    if self.try_eat('\\'):
-                        value += '\\'
-                        if self.done() or self.peek() == '\n':
-                            return invalid(value)
-                    
-                    if not self.done():
+                    while not self.done() and self.peek() not in '\n\'' :
+                        if self.try_eat('\\'):  # skip escaped character
+                            value += '\\'
+                            if self.done() or self.peek() == '\n':
+                                return invalid(value, 'Missing terminating character \'')
                         value += self.consume()
+                        continue
 
-                    if not self.try_eat('\''):
-                        return invalid(value)
+                    if not self.try_eat('\''): #fail since it was not closed
+                        return invalid(value, 'Missing terminating character \'')
                     
-                    value += '\''
-                    return make(TokenKind.CHAR_CONSTANT, value)
+                    value += '\''                    
+                    if len(value) > 2:
+                        return invalid(value, 'Character constant has more than 1 character')
+
+                    return make(TokenKind.STRING_CONSTANT, value)
                 
                 case '[':
                     return make(TokenKind.LBRACE, c)
@@ -301,7 +304,7 @@ class Lexer:
                     pass
 
                 case _:
-                    return invalid(c)
+                    return invalid(c, 'Invalid character')
                 
         return Token(TokenKind.EOF, -1, -1)
 

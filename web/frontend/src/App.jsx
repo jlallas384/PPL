@@ -53,6 +53,28 @@ fn main(): int {
     setLoading(false);
   }
 
+  async function downloadTable() {
+    const res = await fetch("/download", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code }),
+    });
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "lexical_table.txt";
+    document.body.appendChild(a);
+    a.click();
+
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  }
+
   return (
     <div className="container">
       <div className="panel editor">
@@ -82,6 +104,11 @@ fn main(): int {
       <div className="panel output">
         <div className="header">
           <span>OUTPUT</span>
+          {output && (
+            <button className="run-btn" onClick={downloadTable}>
+              Download
+            </button>
+          )}
         </div>
         <div className="wrapper">
           {loading ? (

@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 
 from compiler.lexer.lexer import Lexer, TokenKind
+from tabulate import tabulate
 
 app = FastAPI()
 
@@ -42,3 +44,21 @@ def run_code(req: RunRequest):
         })
 
     return {"tokens": tokens}
+
+
+@app.post("/download")
+def download(req: RunRequest):
+    items = [["Token Kind", "Token Value"]]
+    l = Lexer(req.code)
+
+    while not (tok := l.lex()).eof():
+        items.append([tok.kind.name, tok.value])
+
+    table = tabulate(items, headers="firstrow")
+
+    return PlainTextResponse(
+        table,
+        headers={
+            "Content-Disposition": "attachment; filename=lexical_table.txt"
+        }
+    )

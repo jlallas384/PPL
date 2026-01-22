@@ -252,10 +252,10 @@ class Lexer:
                         return invalid(value, 'Missing terminating character \'')
                     
                     value += '\''                    
-                    if len(value) > 2:
+                    if len(value) > 3:
                         return invalid(value, 'Character constant has more than 1 character')
 
-                    return make(TokenKind.STRING_CONSTANT, value)
+                    return make(TokenKind.CHAR_CONSTANT, value)
                 
                 case '[':
                     return make(TokenKind.LBRACE, c)

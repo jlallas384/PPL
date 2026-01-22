@@ -15,13 +15,15 @@ export const languageConf = {
 		{ open: '[', close: ']' },
 		{ open: '{', close: '}' },
 		{ open: '(', close: ')' },
-		{ open: '"', close: '"', notIn: ['string'] }
+		{ open: '"', close: '"', notIn: ['string'] },
+    { open: "'", close: "'" },
 	],
 	surroundingPairs: [
 		{ open: '{', close: '}' },
 		{ open: '[', close: ']' },
 		{ open: '(', close: ')' },
 		{ open: '"', close: '"' },
+		{ open: "'", close: "'" },
 	],
 };
 
@@ -86,6 +88,7 @@ export const languageDef = {
         /r(#*)"/,
         { token: "string.quote", bracket: "@open", next: "@stringraw.$1" },
       ],
+      [/'/, { token: "string.quote", bracket: "@open", next: "@char" }],
       [
         /[a-zA-Z][a-zA-Z0-9_]*!?|_[a-zA-Z0-9_]+/,
         {
@@ -150,6 +153,13 @@ export const languageDef = {
         },
       ],
       [/["#]/, { token: "string" }],
+    ],
+
+    char: [
+      [/[^\\']+/, "string"],
+      [/@escapes/, "string.escape"],
+      [/\\./, "string.escape.invalid"],
+      [/'/, { token: "string.quote", bracket: "@close", next: "@pop" }],
     ],
 
     numbers: [

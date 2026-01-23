@@ -258,10 +258,10 @@ class Lexer:
                     return make(TokenKind.CHAR_CONSTANT, value)
                 
                 case '[':
-                    return make(TokenKind.LBRACE, c)
+                    return make(TokenKind.LBRACKET, c)
                 
                 case ']':
-                    return make(TokenKind.RBRACE, c)
+                    return make(TokenKind.RBRACKET, c)
                 
                 case '{':
                     return make(TokenKind.LBRACE, c)

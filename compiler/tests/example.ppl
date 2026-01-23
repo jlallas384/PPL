@@ -1,0 +1,60 @@
+// Example PPL program demonstrating language features
+
+class Animal {
+    name: string
+    
+    fn Animal() {
+    }
+    
+    fn speak(): int {
+        print("Some animal sound");
+        return 0;
+    }
+}
+
+class Dog : Animal {
+    fn Dog() {
+    }
+    
+    fn !speak(): int {
+        print("Woof!");
+        return 1;
+    }
+}
+
+class Cat : Animal {
+    fn Cat() {
+    }
+    
+    fn !speak(): int {
+        print("Meow!");
+        return 2;
+    }
+}
+
+fn add(a: int, b: int): int {
+    return a + b;
+}
+
+fn main(): int {
+    // Variable declarations
+    let x: int = 10;
+    let y: int = 20;
+    let sum: int = add(x, y);
+    
+    // Control flow
+    if sum > 25 {
+        print("Sum is greater than 25");
+    } else {
+        print("Sum is 25 or less");
+    }
+    
+    // Loop
+    let i: int = 0;
+    while i < 3 {
+        print("Loop iteration");
+        i = i + 1;
+    }
+    
+    return 0;
+}

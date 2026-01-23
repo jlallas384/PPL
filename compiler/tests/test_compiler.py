@@ -1,6 +1,9 @@
 """Test cases for the PPL compiler."""
+import os
 import sys
-sys.path.insert(0, '/home/runner/work/PPL/PPL')
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from compiler.compiler import compile_source
 

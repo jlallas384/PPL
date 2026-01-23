@@ -542,8 +542,12 @@ def compile_and_run(c_code: str, output_file: str = None) -> tuple[bool, str]:
         f.write(c_code)
         c_file = f.name
     
+    # Use NamedTemporaryFile for secure output file creation
+    output_temp = None
     if output_file is None:
-        output_file = tempfile.mktemp(suffix='')
+        output_temp = tempfile.NamedTemporaryFile(delete=False)
+        output_file = output_temp.name
+        output_temp.close()
     
     try:
         # Compile with GCC

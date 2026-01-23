@@ -522,8 +522,8 @@ class Parser:
         return NewExpr(class_name=class_name, arguments=args, loc=loc)
 
 
-def parse(source: str) -> Program:
-    """Parse source code and return AST."""
+def parse(source: str) -> tuple[Program, list[ParseError]]:
+    """Parse source code and return AST and any errors."""
     lexer = Lexer(source)
     parser = Parser(lexer)
     return parser.parse(), parser.errors
